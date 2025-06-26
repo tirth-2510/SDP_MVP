@@ -84,6 +84,6 @@ def chat_handler(request: dict = Body(...)):
         case "done":
             return Response(content="Your meal plan has already been confirmed. Thank you!", media_type="text/plain", status_code=200)
 
-if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run("app:app", host="localhost", port=8000, reload=True)
+# if __name__ == "__main__":
+#     import uvicorn
+#     uvicorn.run("app:app", host="localhost", port=8000, reload=True)
