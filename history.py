@@ -5,10 +5,10 @@ from collections import deque
 from dbresponse import mongoDB
 
 # PRODUCTION
-# r = redis.Redis(host=os.getenv("REDIS_HOST"), port=os.getenv("REDIS_PORT"), password=os.getenv("REDIS_PASSWORD"), ssl=True, db=0)
+r = redis.Redis(host=os.getenv("REDIS_HOST"), port=os.getenv("REDIS_PORT"), password=os.getenv("REDIS_PASSWORD"), ssl=True, db=0)
 
 # LOCAL TESTING
-r = redis.Redis(host="localhost", port=6379, db=0)
+# r = redis.Redis(host="localhost", port=6379, db=0)
 
 class History:
     @staticmethod
