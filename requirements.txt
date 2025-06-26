@@ -2,8 +2,6 @@ fastapi
 uvicorn
 langchain
 langchain-google-genai
-langchain-milvus
-groq
 dotenv
 redis
 pymongo
