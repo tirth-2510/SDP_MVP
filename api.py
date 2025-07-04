@@ -90,6 +90,6 @@ async def chat(request:dict = Body(...)):
                 "showOptions": True}, 
                 status_code=200)
     
-if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run("api:app", host="0.0.0.0", port=8000, reload=True)
+# if __name__ == "__main__":
+#     import uvicorn
+#     uvicorn.run("api:app", host="0.0.0.0", port=8000, reload=True)
