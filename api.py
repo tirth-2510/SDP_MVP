@@ -25,12 +25,12 @@ async def root():
 
 @app.post("/chat")
 async def chat(request:dict = Body(...)):
-    option = request.get("slot", "1")
+    option = request.get("slot", "diet")
     user_data = request.get("data", {})
     query = request.get("query", "No query found")
 
     match option:
-        case "1":
+        case "diet":
             # Check current conversation Intent
             intent = History.getIntent(user_data["id"])
 
@@ -72,19 +72,22 @@ async def chat(request:dict = Body(...)):
                         History.setChatState(user_data["id"], "improve")
                     return diet_improve(query=query,data=user_data)
             
-        case "2":
+        case "sugar_level":
             return JSONResponse(content = {"response": sugar_support(data=user_data, query=query),
                                        "showSubOptions": True, 
                                        "showOptions": True}, 
                                        status_code=200)
             
-        case "3": 
+        case "lifestyle": 
             return JSONResponse(content = "Will be available soon", status_code=200)
-        case "4":
+        
+        case "food":
             return JSONResponse(content = "Will be available soon", status_code=200)
-        case "5":
+        
+        case "medicines":
             return JSONResponse(content = "Will be available soon", status_code=200)
-        case "6":
+        
+        case "log_parameters":
             return JSONResponse(content = "Will be available soon", status_code=200)
     return {"data": user_data, "option": option}
 
