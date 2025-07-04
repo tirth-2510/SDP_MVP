@@ -38,35 +38,29 @@ async def chat(request:dict = Body(...)):
             if intent is None:
                 intent_res = getIntent(userId=user_data["id"],query=query)
                 intent = intent_res.get("intent")
-                print("Intent:", intent)
                 if intent == "unknown":
                     return JSONResponse(content = {"response":"I'm sorry, I don't understand. Your request seems unrelated to my capabilities, Please ask a *Diet Guidance* related question.", "showSubOptions": True, "showOptions": False}, status_code=200)
                 History.setIntent(userId=user_data["id"], intent=intent)
 
             match intent:
                 case "meal_advice":
-                    print("Calling Food Advice")
                     return food_advice(query=query, data=user_data)
                 case "diet_plan_today":
-                    print("Calling Todays Diet Plan generation")
                     current_state = History.getChatState(user_data["id"])
                     if current_state is None:
                         History.setChatState(user_data["id"], "generate")
                     return generate_plan(query=query,data=user_data)
                 case "diet_plan_week":
-                    print("Calling Weekly Diet Plan generation")
                     current_state = History.getChatState(user_data["id"])
                     if current_state is None:
                         History.setChatState(user_data["id"], "generate")
                     return generate_plan(query=query, data=user_data)
                 case "analyze_diet_today":
-                    print("Calling Recall Analysis")
                     current_state = History.getChatState(user_data["id"])
                     if current_state is None:
                         History.setChatState(user_data["id"], "analyze")
                     return recall_analysis(data=user_data, query=query)
                 case "improve_current_diet":
-                    print("Calling Improvement Plan")
                     current_state = History.getChatState(user_data["id"])
                     if current_state is None:
                         History.setChatState(user_data["id"], "improve")
