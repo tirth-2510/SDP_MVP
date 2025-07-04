@@ -8,6 +8,9 @@ from core.diet_guidance.generate import generate_plan
 from core.diet_guidance.analyze import recall_analysis
 from core.diet_guidance.improve import diet_improve
 from core.sugar_support.sugar_control import sugar_support
+from core.lifestyle.lifestyle_tip import lifestyle
+from core.food_review.food_review import food
+from core.medic.medication import medicine
 
 app = FastAPI()
 
@@ -40,6 +43,8 @@ async def chat(request:dict = Body(...)):
                 intent = intent_res.get("intent")
                 if intent == "unknown":
                     return JSONResponse(content = {"response":"I'm sorry, I don't understand. Your request seems unrelated to my capabilities, Please ask a *Diet Guidance* related question.", "showSubOptions": True, "showOptions": False}, status_code=200)
+                elif intent == "exit":
+                    return JSONResponse(content = {"response":"Goodbye!", "showSubOptions": False, "showOptions": True}, status_code=200)
                 History.setIntent(userId=user_data["id"], intent=intent)
 
             match intent:
@@ -67,24 +72,24 @@ async def chat(request:dict = Body(...)):
                     return diet_improve(query=query,data=user_data)
             
         case "sugar_level":
-            return JSONResponse(content = {"response": sugar_support(data=user_data, query=query),
-                                       "showSubOptions": True, 
-                                       "showOptions": True}, 
-                                       status_code=200)
+            return sugar_support(data=user_data, query=query)
             
         case "lifestyle": 
-            return JSONResponse(content = "Will be available soon", status_code=200)
+            return lifestyle(data=user_data, query=query)
         
         case "food":
-            return JSONResponse(content = "Will be available soon", status_code=200)
+            return food(data=user_data, query=query)
         
         case "medicines":
-            return JSONResponse(content = "Will be available soon", status_code=200)
+            return medicine(data=user_data, query=query)
         
         case "log_parameters":
-            return JSONResponse(content = "Will be available soon", status_code=200)
-    return {"data": user_data, "option": option}
-
+            return JSONResponse(content = {
+                "response":"Will be available soon",
+                "showSubOptions": False, 
+                "showOptions": True}, 
+                status_code=200)
+    
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run("api:app", host="0.0.0.0", port=8000, reload=True)

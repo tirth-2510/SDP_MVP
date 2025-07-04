@@ -15,6 +15,7 @@ Do not include any introductory or closing remarks just the summary of our chat 
             - "diet_plan_week" → if they want a meal plan for the whole week
             - "analyze_diet_today" → if they want you to analyze what they ate
             - "improve_current_diet" → if they want suggestions to improve their diet
+            - "exit" → if they want to exit the conversation
 
             Only reply with a valid JSON like this:
             {{ "intent": "<one of the allowed sub-intents>" }}
@@ -32,6 +33,12 @@ Do not include any introductory or closing remarks just the summary of our chat 
 
             User: Who won IPL 2022?
             Response: {{ "intent": "invalid" }}
+
+            User: Ok, I am done.
+            Response: {{ "intent": "exit" }}
+            
+            User: Exit
+            Response: {{ "intent": "exit" }}
 
             Now classify the following message:
             User: {query}
@@ -642,62 +649,27 @@ REMEMBER:
         PAST CHAT SUMMARY:
         {summary}
         
-        Analyze Food Item based on:
-        Glycemic load - Low,medium,high. Low means green, medium yellow and high as red. Wheat Roti, rice, bread all have medium/high glycemic load,mark these as yellow or orange only
-        Nutriscore factor- Red/orange be considered as red, yellow as yellow and light/dark green as green
-        Also review it as per {new_conditions}. If item is not good for {new_conditions}. Mark it as red  
+        EXAMPLE RESPONSE STRUCTURE:
+        {name}, here's a meal suggestion for <SLOT> based on your health goals:
 
-        Final color code will be lower  of  the all factors  e.g if is green as per glycemic load and red /orange as per nutriscore then shall be red 
-        Also include:
-        
-        Macros summary for 1 standard portion (Katori - 150 ml, 1 PC, 1 tsp, etc. as applicable):
+        Suggested Options:
+        • <FOOD ITEM 1> — <reason it's good, e.g., High in protein, low GI>
+        • <FOOD ITEM 2> — <reason>
+        • <FOOD ITEM 3> — <optional variation>
 
-        Calories (kcal)
-        Carbs (g/ %)
-        Simple carbs (g/%)
-        Complex carbs (g%)
-        Protein (g/ %)
-        Fat (g/%)
-        Fiber (g/%)
+        Tips:
+        • Pair with: <e.g., Mint chutney, curd, lemon water>
+        • Avoid: <e.g., White bread, fruit juice, sugary tea/coffee>
 
-        suggest 2-3 healthier alternatives suited to my condition.
+        Macronutrient Range (Est.):
+        • Protein: ~x%
+        • Carbs: ~x% (mostly complex)
+        • Fats: ~x% (healthy fats)
 
-        Tips to improve
-
-        Here’s a SAMPLE  based on health profile 👇
-
-        🍗 Butter Chicken Review (1 Katori - 150 ml)
-        🔴 Avoid / Rare treat only
-        
-        Macros: ~285 kcal | 9g Carbs | 17g Protein | 20g Fat
-        
-        Good Aspects:
-        - High protein (chicken)
-        - Rich taste, filling
-        
-        Not Good Aspects:
-        - High Glycemic Load (when paired with naan/rice)
-        - NutriScore: 🔴 (High butter, cream, saturated fat)
-        - Heavy on digestion, causes acidity
-
-        Healthier Alternatives for You:
-        Tandoori Chicken (No Butter) - 🟢
-        - Lean, grilled, low-fat
-        - Marinated with curd + masala
-
-
-        Chicken Saagwala (Spinach Gravy) - 🟢
-        - Iron-rich, gut-friendly
-        - No cream or butter
-
-        Home-style Chicken Curry (Less Oil) - 🟠
-        - Tomato-onion base
-        - Boil or sauté instead of frying
-
-        ADDITIONAL INSTRUCTIONS:
-        - Prefer grilled, stew, or sauté over cream-based gravies
-        - Eat with millet roti or stir-fried veggies
-        - Avoid pairing with rice or naan
+        RULES:
+        You have to follow the above response structure and do not deviate from it.
+        You should not answer any out of bound questions, reply with "Sorry, I'm not sure how to help you with that. Please ask for a meal advice"
+        Do not add any introductory or closing statements i want this response only nothing eles.
         """
     
     @staticmethod
@@ -834,10 +806,27 @@ REMEMBER:
             While Responding always add this disclaimer:
             ⚠️ Disclaimer: This is generic information, not a prescription. Always consult your doctor before taking any medicine
 
-            User is going to ask about a medicine and you have to respond to it in the following format:
-            Give description about the medication or follow what the user wants and if the question is not relatable just deny and dont answer any out of the box question
-            Respond to the query in about 200 words only in proper points and dont answer any out of the box question.
-            failing to do so, you will be terminated instantly
+            EXAMPLE SKELETAL RESPONSE STRUCTURE:
+            <1-line Neutral reassurance or de-escalation if the user is anxious>
+
+            Based on your situation:
+            • <Action point 1 - what to do now>
+            • <Action point 2 - what *not* to do / what to avoid>
+            • <Monitoring tip - what to track or observe>
+
+            ⚠️ When to take action:
+            <1-line symptom alert or escalation criteria>
+
+            Quick Reminder:
+            <1-line Simple takeaway, habit nudge, or next step, e.g., "Set a daily alarm for meds if this happens often.">
+
+            <1-line Optional follow-up offer: "Want to log this or adjust your meals today to compensate?">
+
+            RULES:
+            • Do NOT restate the user's question. Just answer clearly.
+            • If the question is irrelevant, out of scope, or unsafe to answer, politely decline without guessing or answering.
+            • Stay within 200 words. Structure the answer with bullet points as shown above.
+            • Violation of these constraints will immediately terminate your response rights.
             """
     
     @staticmethod
@@ -861,6 +850,25 @@ REMEMBER:
             • Diet Liking: {",".join(community) if community else "Any"}
             • Diet Type: {", ".join(food_type) if food_type else "Any"} preferred
 
-            Respond to the query in about 200 words only in proper points and dont answer any out of the box question.
-            failing to do so, you will be terminated instantly
-            """
+        EXAMPLE SKELETAL RESPONSE STRUCTURE:
+        <1-line Neutral reassurance or de-escalation if the user is anxious>
+
+        Based on your situation:
+        • <Action point 1 - what to do now>
+        • <Action point 2 - what *not* to do / what to avoid>
+        • <Monitoring tip - what to track or observe>
+
+        When to take action:
+        <1-line symptom alert or escalation criteria>
+
+        Quick Reminder:
+        <1-line Simple takeaway, habit nudge, or next step, e.g., "Set a daily alarm for meds if this happens often.">
+    
+        RULES:
+        • Always respond in the same tone and style as the user.
+        • Do NOT restate the user's question. Respond naturally and concisely.
+        • Keep responses within 180 words and use bullet points.
+        • Avoid suggesting things the user is allergic to or has disliked in prior inputs.
+        • If the question is irrelevant to lifestyle or unsafe, politely decline.
+        • Stay friendly and non-judgmental, like a personal coach, not a doctor.
+        """
