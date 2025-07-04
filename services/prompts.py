@@ -10,11 +10,11 @@ Do not include any introductory or closing remarks just the summary of our chat 
 
             RULES FOR INTENT:
             Use the following list of allowed intent:
-            - "meal_advice" → if they mention breakfast, lunch, dinner, or snack help
+            - "meal_advice" → if they want an advice on what they should eat during a particular time of day.
             - "diet_plan_today" → if they want a meal plan for today
             - "diet_plan_week" → if they want a meal plan for the whole week
-            - "analyze_diet_today" → if they want you to analyze what they ate
-            - "improve_current_diet" → if they want suggestions to improve their diet
+            - "analyze_diet_today" → if they want you to analyze what they ate, or analyze their current diet plan
+            - "improve_current_diet" → if they want suggestions to improve their diet or know how to improve their diet
             - "exit" → if they want to exit the conversation
 
             Only reply with a valid JSON like this:
@@ -32,7 +32,7 @@ Do not include any introductory or closing remarks just the summary of our chat 
             Response: {{ "intent": "analyze_current_diet" }}
 
             User: Who won IPL 2022?
-            Response: {{ "intent": "invalid" }}
+            Response: {{ "intent": "unknown" }}
 
             User: Ok, I am done.
             Response: {{ "intent": "exit" }}
