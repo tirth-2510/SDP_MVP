@@ -5,6 +5,7 @@ from services.dbresponse import mongoDB
 from services.botresponse import BotResponse
 from langchain_core.messages import AIMessage, HumanMessage
 from dotenv import load_dotenv
+import os
 
 load_dotenv()
 
