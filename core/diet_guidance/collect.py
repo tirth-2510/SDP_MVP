@@ -9,7 +9,7 @@ def collect_plan(data, query):
     state = History.getChatState(data["id"])
 
     # Meal collection loop
-    while state == "collect":
+    if state == "collect":
         conversations = getLastChats(data["id"])
 
         # Get the meal slots covered

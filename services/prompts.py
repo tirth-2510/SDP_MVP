@@ -377,8 +377,8 @@ User Profile:
 • Disorders: {conditions}
 • Allergies: {", ".join(allergies) if allergies else "No allergies"}
 • Food Preferences: {community}-style, {foodType}
-• Likes: {", ".join(preferences["likes"]) if "likes" in preferences and preferences["likes"] else "No likes"}
-• Dislikes: {", ".join(preferences["dislikes"]) if "dislikes" in preferences and preferences["dislikes"] else "No Dislikes"}
+• Likes: {", ".join(preferences["likes"]) if preferences and "likes" in preferences and preferences["likes"] else "No likes"}
+• Dislikes: {", ".join(preferences["dislikes"]) if preferences and "dislikes" in preferences and preferences["dislikes"] else "No Dislikes"}
 • Calorie Goal: {calorie_goal} kcal/day
 • Preferred Diet: {foodType}
 • Current Diet:
@@ -471,8 +471,8 @@ Current Diet summary:
 Include {community}-style meals adapted for {",".join(conditions) if conditions else "No Disorders"} wherever relevant in each slot.
 {",".join(food_type) if food_type else "Any Food type"} , remember it while designing diet plan.
 
-Remember likes {",".join(preferences["likes"]) if "likes" in preferences and preferences["likes"] else "No Preferences"} but remove them in case any of these are unhealthy options
-Also remember my Dislikes {",".join(preferences["dislikes"]) if "dislikes" in preferences and preferences["dislikes"] else "No Dislikes"} while designing diet plan
+Remember likes {",".join(preferences["likes"]) if preferences and "likes" in preferences and preferences["likes"] else "No Preferences"} but remove them in case any of these are unhealthy options
+Also remember my Dislikes {",".join(preferences["dislikes"]) if preferences and "dislikes" in preferences and preferences["dislikes"] else "No Dislikes"} while designing diet plan
 
 Take following as guidelines
 Recommend “6 almonds + 2 walnuts” (80 kcal) before breakfast if no nut allergy — Highlight importance to kickstart day with good Fat. 
@@ -555,8 +555,8 @@ REMEMBER:
         Disorders: {",".join(conditions) if conditions else "No Disorders"} 
         Allergy- {", ".join(allergies) if allergies else "No Allergies"}
         Prefer {community}-style, {", ".join(food_type) if food_type else "Any Food type"}, easy-to-cook, home-based food
-        Dislike: {", ".join(preferences["dislikes"]) if "dislikes" in preferences and preferences["dislikes"] else "No Dislikes"}
-        Like: {", ".join(preferences["likes"]) if "likes" in preferences and preferences["likes"] else "No Preferences"}
+        Dislike: {", ".join(preferences["dislikes"]) if preferences and "dislikes" in preferences and preferences["dislikes"] else "No Dislikes"}
+        Like: {", ".join(preferences["likes"]) if preferences and "likes" in preferences and preferences["likes"] else "No Preferences"}
         Calorie Target: {calorie_goal} kcal/day
         Diet liking: {community}
         Diet Type preferred: {", ".join(food_type) if food_type else "Any Food type"}
@@ -640,8 +640,8 @@ REMEMBER:
         Disorders: {",".join(conditions) if conditions else "No Disorders"} 
         Allergy- {", ".join(allergies) if allergies else "No Allergies"}
         Prefer {community}-style, {", ".join(food_type) if food_type else "Any Food type"}, easy-to-cook, home-based food
-        Dislike: {", ".join(preferences["dislikes"]) if "dislikes" in preferences and preferences["dislikes"] else "No Dislikes"}
-        Like: {", ".join(preferences["likes"]) if "likes" in preferences and preferences["likes"] else "No Preferences"}
+        Dislike: {", ".join(preferences["dislikes"]) if preferences and "dislikes" in preferences and preferences["dislikes"] else "No Dislikes"}
+        Like: {", ".join(preferences["likes"]) if preferences and "likes" in preferences and preferences["likes"] else "No Preferences"}
         Calorie Target: {calorie_goal} kcal/day
         Diet liking: {community}
         Diet Type preferred: {", ".join(food_type) if food_type else "Any Food type"}
@@ -687,8 +687,8 @@ REMEMBER:
             • Disorders: {", ".join(conditions) if conditions else "No Conditions"}
             • Allergies: {", ".join(allergies) if allergies else "no allergies"}
             • Prefer {",".join(community) if community else "Any"}-style, {food_type}, easy-to-cook, home-based food
-            • Dislikes: {", ".join(preferences["dislikes"]) if "dislikes" in preferences and preferences["dislikes"] else "no dislikes"}
-            • Likes: {", ".join(preferences["likes"]) if "likes" in preferences and preferences["likes"] else "no likes"}
+            • Dislikes: {", ".join(preferences["dislikes"]) if preferences and "dislikes" in preferences and preferences["dislikes"] else "no dislikes"}
+            • Likes: {", ".join(preferences["likes"]) if preferences and "likes" in preferences and preferences["likes"] else "no likes"}
             • Calorie Target: {calorie_goal} kcal/day
             • Diet Liking: {",".join(community) if community else "Any"}
             • Diet Type: {", ".join(food_type) if food_type else "Any"} preferred
@@ -729,7 +729,7 @@ REMEMBER:
             • Avoid sugar and carbs for now — no roti, rice, fruit, sweets, biscuits, cold drinks
             Remember I am {",".join(community) if community else "Any"} having {conditions} and I am {", ".join(food_type) if food_type else "Non Vegetarian"}
 
-            Remember likes {", ".join(preferences["likes"]) if "likes" in preferences and preferences["likes"] else "no likes"} but remove them in case any of these are unhealthy options
+            Remember likes {", ".join(preferences["likes"]) if preferences and "likes" in preferences and preferences["likes"] else "no likes"} but remove them in case any of these are unhealthy options
             Propose 5 to 6 high protein or good fats items with above considerations e.g:
                 ◦ Boiled eggs
                 ◦ Paneer cubes
@@ -797,8 +797,8 @@ REMEMBER:
             • Disorders: {", ".join(conditions) if conditions else "No Conditions"}
             • Allergies: {", ".join(allergies) if allergies else "no allergies"}
             • Prefer {",".join(community) if community else "Any"}-style, {food_type}, easy-to-cook, home-based food
-            • Dislikes: {", ".join(preferences["dislikes"]) if "dislikes" in preferences and preferences["dislikes"] else "no dislikes"}
-            • Likes: {", ".join(preferences["likes"]) if "likes" in preferences and preferences["likes"] else "no likes"}
+            • Dislikes: {", ".join(preferences["dislikes"]) if preferences and "dislikes" in preferences and preferences["dislikes"] else "no dislikes"}
+            • Likes: {", ".join(preferences["likes"]) if preferences and "likes" in preferences and preferences["likes"] else "no likes"}
             • Calorie Target: {calorie_goal} kcal/day
             • Diet Liking: {",".join(community) if community else "Any"}
             • Diet Type: {", ".join(food_type) if food_type else "Any"} preferred
@@ -844,8 +844,8 @@ REMEMBER:
             • Disorders: {", ".join(conditions) if conditions else "No Conditions"}
             • Allergies: {", ".join(allergies) if allergies else "no allergies"}
             • Prefer {",".join(community) if community else "Any"}-style, {food_type}, easy-to-cook, home-based food
-            • Dislikes: {", ".join(preferences["dislikes"]) if "dislikes" in preferences and preferences["dislikes"] else "no dislikes"}
-            • Likes: {", ".join(preferences["likes"]) if "likes" in preferences and preferences["likes"] else "no likes"}
+            • Dislikes: {", ".join(preferences["dislikes"]) if preferences and "dislikes" in preferences and preferences["dislikes"] else "no dislikes"}
+            • Likes: {", ".join(preferences["likes"]) if preferences and "likes" in preferences and preferences["likes"] else "no likes"}
             • Calorie Target: {calorie_goal} kcal/day
             • Diet Liking: {",".join(community) if community else "Any"}
             • Diet Type: {", ".join(food_type) if food_type else "Any"} preferred

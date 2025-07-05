@@ -14,7 +14,7 @@ def recall_analysis(data, query):
     chat_state = History.getChatState(data["id"])
 
     # If no user diet plan exists, first show the static message.
-    if current_diet_plan is None:
+    if current_diet_plan is None and chat_state == "analyze":
         History.setChatState(data["id"], "collect")
         return JSONResponse(content={
             "response": f"Hello {data["name"]}, I'd like to understand your current food habits. That way, I can guide you better on the right changes to manage your diabetes.\nLet's begin with how you start your day — like a glass of water, tea/coffee, or anything else?\n",
